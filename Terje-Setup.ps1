@@ -1,3 +1,16 @@
+<#
+
+    ██     ██  █████  ██████  ███    ██ ██ ███    ██  ██████  ██ 
+    ██     ██ ██   ██ ██   ██ ████   ██ ██ ████   ██ ██       ██ 
+    ██  █  ██ ███████ ██████  ██ ██  ██ ██ ██ ██  ██ ██   ███ ██ 
+    ██ ███ ██ ██   ██ ██   ██ ██  ██ ██ ██ ██  ██ ██ ██    ██    
+     ███ ███  ██   ██ ██   ██ ██   ████ ██ ██   ████  ██████  ██ 
+
+      -------------------------------------------------------
+      This script is public and should NEVER contain secrets!
+      -------------------------------------------------------
+#>
+
 #
 # Assumes the hard-autounattend.xml is applied.
 #    Need to customize this at some point, to enable security and some apps/features.
@@ -38,7 +51,6 @@ ffmpeg
 fsviewer
 greenshot
 logitech-camera-settings
-microsoft-windows-terminal
 paint.net
 protonvpn
 teamviewer
@@ -71,3 +83,6 @@ $regPath = "HKLM:\SOFTWARE\WOW6432Node\Google\Chrome\Extensions\eimadpbcbfnmbkop
 New-Item -Path $regPath -Force
 Set-ItemProperty -Path $regPath -Name "update_url" -Value $updateUrl
 
+#
+# Windows settings
+#
