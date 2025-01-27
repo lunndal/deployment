@@ -20,7 +20,7 @@
 #choco feature enable -n allowGlobalConfirmation
 
 #
-# Install choco applications.
+# Install choco applications. 
 #
 $chocoApps = @"
 choco-cleaner
