@@ -35,6 +35,11 @@ $logFile = "C:\Windows\Temp\Setup-oobeSystem.log"
 Start-Transcript -Path $logFile -Append
 Write-Output "Starting script in oobeSystem phase."
 
+#
+# Debug handling.
+#
+Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-START oobeSystem phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
+
 
 #
 # Windows settings.
@@ -52,6 +57,8 @@ Write-Output "Starting script in oobeSystem phase."
 # Application settings
 #
 
+
+Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-END oobeSystem phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
 
 # Stop logging.
 Stop-Transcript

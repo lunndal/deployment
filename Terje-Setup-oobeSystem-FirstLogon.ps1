@@ -29,9 +29,14 @@
 #
 $logFile = "C:\Windows\Temp\Setup-oobeSystem-FirstLogon-$($env:USERNAME).log"
 
-W Enable logging.
+# Enable logging.
 Start-Transcript -Path $logFile #-Append
 Write-Output "Starting script in oobeSystem FirstLogon phase."
+
+#
+# Debug handling.
+#
+Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-START oobeSystem-FirstLogon phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
 
 #
 # Windows settings.
@@ -55,6 +60,9 @@ winget install spotify.spotify --disable-interactivity --accept-package-agreemen
 # Git 
 git config --global user.email $myEmail
 git config --global user.name $myName
+
+
+Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-END oobeSystem-FirstLogon phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
 
 # Stop logging.
 Stop-Transcript
