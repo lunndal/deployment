@@ -11,6 +11,8 @@
       -------------------------------------------------------
 #>
 
+# Source
+# https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-oobeSystem-FirstLogon.ps1
 
 #
 # USAGE

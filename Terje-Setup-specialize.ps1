@@ -11,6 +11,10 @@
       -------------------------------------------------------
 #>
 
+# Source 
+# https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-specialize.ps1
+
+
 #
 # USAGE
 # Run this script during the "specialize" phase from autounattend.xml.
