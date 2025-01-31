@@ -11,70 +11,41 @@
       -------------------------------------------------------
 #>
 
+
 #
-# Assumes the hard-autounattend.xml is applied.
-#    Need to customize this at some point, to enable security and some apps/features.
-#
+# USAGE
+# Run this script during the "oobeSystem" phase, under the FirstLogonCommands section, of autounattend.xml
+# Commands will run only once in the context of the logged in user.
+# 
 
 #
 # ISSUES
+# 
+
 #
-# Execution Policy er ikke liberal nok når dette skriptet skal kjøres.
-# WiFi var ikke påkoblet. Måtte gjøres manuelt.
+# Declarations
+#
+$logFile = "C:\Windows\Temp\Setup-oobeSystem-FirstLogon-$($env:USERNAME).log"
+
+# Enable logging.
+Start-Transcript -Path $logFile -Append
 
 #
 # Windows settings.
 #
 
 
-# Install chocolatey (as admin!)
-# DEBUG
-Set-ExecutionPolicy Bypass -Scope Process -Force
-[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-choco feature enable -n allowGlobalConfirmation
+#
+# Install applications.
+#
 
 #
-# Install choco applications.  
+# ? Install Chrome extensions
+# BROKEN - plugins do not appear!
 #
-$chocoApps = @"
-choco-cleaner
-choco-upgrade-all-at-startup
-1password
-sysinternals
-pwsh
-git
-notepadplusplus
-GoogleChrome
-powertoys
-putty
-7zip
-ffmpeg
-fsviewer
-greenshot
-logitech-camera-settings
-paint.net
-protonvpn
-teamviewer
-transgui
-treesizefree
-vlc
-wireshark
-yt-dlp
-vscode
-Firefox
-audacious
-audacity
-"@
 
-$chocoAppsArray = ($chocoApps -split "`n")
-# DEBUG
-choco install @chocoAppsArray
-
-#
-# Install Chrome extensions
-#
 $updateUrl = 'json { "update_url": "https://clients2.google.com/service/update2/crx" }'
+
 # 1password
 $regPath = "HKLM:\SOFTWARE\WOW6432Node\Google\Chrome\Extensions\aeblfdkhhhdcdjpifhhbdiojplfjncoa"
 New-Item -Path $regPath -Force
@@ -86,5 +57,12 @@ New-Item -Path $regPath -Force
 Set-ItemProperty -Path $regPath -Name "update_url" -Value $updateUrl
 
 #
-# Windows settings
+# Application settings
 #
+
+# Git (this was done earlier during the first logon of the first admin account.)
+#git config --global user.email $myEmail
+#git config --global user.name $myName
+
+# Stop logging.
+Stop-Transcript
