@@ -6,7 +6,27 @@ Start-Process powershell -ArgumentList "-NoExit -Command `"
 
 
 $scriptUrl = "https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-oobeSystem-FirstLogon.ps1"
-Invoke-Expression (Invoke-WebRequest -UseBasicParsing $scriptUrl).content -Verbose
+Invoke-Expression (Invoke-WebRequest -UseBasicParsing -Headers @{"Cache-Control"="no-cache"} $scriptUrl).content -Verbose
+
+
+Start-Process powershell -Wait -ArgumentList "-NoExit -Command `"Set-Variable -Name 'scriptUrl' -Value 'https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-oobeSystem-FirstLogon.ps1'; Invoke-Expression (Invoke-WebRequest -UseBasicParsing -Headers @{'Cache-Control'='no-cache'} $scriptUrl).content -Verbose`""
+
+
+Start-Process powershell -Wait -ArgumentList "-NoExit -Command `"Write-Output 'balle'; write-output 'nalle'`""
+
+Start-Process powershell -Wait -ArgumentList "-NoExit -Command `"{$scriptUrl = 'https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-oobeSystem-FirstLogon.ps1'}`""
+
+
+
+
+
+
+
+
+
+
+
+
 
 <#
 Start-Transcript -Path "C:\Windows\Temp\terje-setup.log" -Append

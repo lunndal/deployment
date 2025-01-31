@@ -32,7 +32,7 @@ $logFile = "C:\Windows\Temp\Setup-oobeSystem-FirstLogon-$($env:USERNAME).log"
 # Enable logging.
 Start-Transcript -Path $logFile -Append
 
-Write-Debug "Scriptet kjører"
+Write-Output "Scriptet kjører"
 #
 # Windows settings.
 #
