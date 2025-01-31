@@ -72,7 +72,7 @@ Write-Output "Starting script in specialize phase."
 #
 # Debug handling.
 #
-Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-START specialize phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
+#Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-START specialize phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
 
 #
 # Windows settings.
@@ -99,6 +99,11 @@ choco feature enable -n allowGlobalConfirmation
 $chocoAppsArray = ($chocoApps -split "`n")
 choco install @chocoAppsArray --log-file=$($chocoLog) --no-progress --yes --no-color --limit-output --ignore-detected-reboot
 
+# onthespot
+$onthespotOutDir = "C:\Program Files\onthespot"
+Invoke-WebRequest -Uri "https://github.com/casualsnek/onthespot/releases/latest/download/onthespot_win_ffm.exe" 
+
+
 #
 # Install Chrome extensions
 #
@@ -108,7 +113,7 @@ choco install @chocoAppsArray --log-file=$($chocoLog) --no-progress --yes --no-c
 # Global application settings
 #
 
-Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-END specialize phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
+#Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-END specialize phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
 
 # Stop logging.
 Stop-Transcript
