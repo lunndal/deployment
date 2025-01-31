@@ -33,6 +33,8 @@ $logFile = "C:\Windows\Temp\Setup-oobeSystem.log"
 
 # Enable logging.
 Start-Transcript -Path $logFile -Append
+Write-Output "Starting script in oobeSystem phase."
+
 
 #
 # Windows settings.
@@ -44,29 +46,12 @@ Start-Transcript -Path $logFile -Append
 #
 
 #
-# ? Install Chrome extensions
-# BROKEN - plugins do not appear!
-#
-
-$updateUrl = 'json { "update_url": "https://clients2.google.com/service/update2/crx" }'
-
-# 1password
-$regPath = "HKLM:\SOFTWARE\WOW6432Node\Google\Chrome\Extensions\aeblfdkhhhdcdjpifhhbdiojplfjncoa"
-New-Item -Path $regPath -Force
-Set-ItemProperty -Path $regPath -Name "update_url" -Value $updateUrl
-
-# Dark Reader
-$regPath = "HKLM:\SOFTWARE\WOW6432Node\Google\Chrome\Extensions\eimadpbcbfnmbkopoojfekhnkhdbieeh"
-New-Item -Path $regPath -Force
-Set-ItemProperty -Path $regPath -Name "update_url" -Value $updateUrl
+# Install Chrome extensions
 
 #
 # Application settings
 #
 
-# Git
-git config --global user.email $myEmail
-git config --global user.name $myName
 
 # Stop logging.
 Stop-Transcript

@@ -29,13 +29,10 @@
 #
 $logFile = "C:\Windows\Temp\Setup-oobeSystem-FirstLogon-$($env:USERNAME).log"
 
-Write-Output "Scriptet kjører 1"
-
-
-# Enable logging.
+W Enable logging.
 Start-Transcript -Path $logFile #-Append
+Write-Output "Starting script in oobeSystem FirstLogon phase."
 
-Write-Output "Scriptet kjører 2"
 #
 # Windows settings.
 #
@@ -45,31 +42,19 @@ Write-Output "Scriptet kjører 2"
 # Install applications.
 #
 
-#
-# ? Install Chrome extensions
-# BROKEN - plugins do not appear!
-#
-<#
-$updateUrl = 'json { "update_url": "https://clients2.google.com/service/update2/crx" }'
+# Spotify through winget
+winget install spotify.spotify --disable-interactivity --accept-package-agreements --accept-source-agreements --silent
 
-# 1password
-$regPath = "HKLM:\SOFTWARE\WOW6432Node\Google\Chrome\Extensions\aeblfdkhhhdcdjpifhhbdiojplfjncoa"
-New-Item -Path $regPath -Force
-Set-ItemProperty -Path $regPath -Name "update_url" -Value $updateUrl
-
-# Dark Reader
-$regPath = "HKLM:\SOFTWARE\WOW6432Node\Google\Chrome\Extensions\eimadpbcbfnmbkopoojfekhnkhdbieeh"
-New-Item -Path $regPath -Force
-Set-ItemProperty -Path $regPath -Name "update_url" -Value $updateUrl
-#>
+#
+# Install Chrome extensions
 
 #
 # Application settings
 #
 
-# Git (this was done earlier during the first logon of the first admin account.)
-#git config --global user.email $myEmail
-#git config --global user.name $myName
+# Git 
+git config --global user.email $myEmail
+git config --global user.name $myName
 
 # Stop logging.
 Stop-Transcript

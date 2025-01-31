@@ -30,16 +30,19 @@
 # Declarations
 #
 $logFile = "C:\Windows\Temp\Setup-specialize.log"
+$chocoLog = "C:\Windows\Temp\Setup-specialize-choco.log"
+
 $myName = "Terje With Lunndal"
 $myEmail = "terje@lunndal.priv.no"
+
 $chocoApps = @"
+notepadplusplus
 choco-cleaner
 choco-upgrade-all-at-startup
 1password
 sysinternals
 pwsh
 git
-notepadplusplus
 GoogleChrome
 powertoys
 putty
@@ -64,6 +67,12 @@ audacity
 
 # Enable logging.
 Start-Transcript -Path $logFile -Append
+Write-Output "Starting script in specialize phase."
+
+#
+# Debug handling.
+#
+Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-START: Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
 
 #
 # Windows settings.
@@ -88,32 +97,18 @@ choco feature enable -n allowGlobalConfirmation
 # Choco applications.  
 # OK? for 7zip. Not sure about the list as a whole.
 $chocoAppsArray = ($chocoApps -split "`n")
-choco install @chocoAppsArray
-
-# Spotify through winget
-winget install spotify.spotify --disable-interactivity --accept-package-agreements --accept-source-agreements --silent
+choco install @chocoAppsArray --log-file=$($chocoLog) --no-progress --yes --no-color --limit-output --ignore-detected-reboot
 
 #
 # Install Chrome extensions
-# BROKEN - plugins do not appear!
 #
 
-$updateUrl = 'json { "update_url": "https://clients2.google.com/service/update2/crx" }'
-
-# 1password
-$regPath = "HKLM:\SOFTWARE\WOW6432Node\Google\Chrome\Extensions\aeblfdkhhhdcdjpifhhbdiojplfjncoa"
-New-Item -Path $regPath -Force
-Set-ItemProperty -Path $regPath -Name "update_url" -Value $updateUrl
-
-# Dark Reader
-$regPath = "HKLM:\SOFTWARE\WOW6432Node\Google\Chrome\Extensions\eimadpbcbfnmbkopoojfekhnkhdbieeh"
-New-Item -Path $regPath -Force
-Set-ItemProperty -Path $regPath -Name "update_url" -Value $updateUrl
 
 #
 # Global application settings
 #
 
+Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-END: Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
 
 # Stop logging.
 Stop-Transcript
