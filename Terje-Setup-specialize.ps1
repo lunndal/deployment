@@ -90,6 +90,9 @@ choco feature enable -n allowGlobalConfirmation
 $chocoAppsArray = ($chocoApps -split "`n")
 choco install @chocoAppsArray
 
+# Spotify through winget
+winget install spotify.spotify --disable-interactivity --accept-package-agreements --accept-source-agreements --silent
+
 #
 # Install Chrome extensions
 # BROKEN - plugins do not appear!

@@ -1,21 +1,11 @@
-Start-Process powershell -ArgumentList "-NoExit -Command `"
-    $url = 'https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-oobeSystem-FirstLogon.ps1'; 
-    $scriptPath = Join-Path $env:TEMP 'script.ps1'; 
-    Invoke-WebRequest -Uri $url -OutFile $scriptPath; 
-    . $scriptPath`"" -Wait
+$scriptUrl = "https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-specialize.ps1"
+Invoke-Expression (Invoke-WebRequest -UseBasicParsing -Headers @{"Cache-Control"="no-cache"} $scriptUrl).content -Verbose
 
+$scriptUrl = "https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-oobeSystem.ps1"
+Invoke-Expression (Invoke-WebRequest -UseBasicParsing -Headers @{"Cache-Control"="no-cache"} $scriptUrl).content -Verbose
 
 $scriptUrl = "https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-oobeSystem-FirstLogon.ps1"
 Invoke-Expression (Invoke-WebRequest -UseBasicParsing -Headers @{"Cache-Control"="no-cache"} $scriptUrl).content -Verbose
-
-
-Start-Process powershell -Wait -ArgumentList "-NoExit -Command `"Set-Variable -Name 'scriptUrl' -Value 'https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-oobeSystem-FirstLogon.ps1'; Invoke-Expression (Invoke-WebRequest -UseBasicParsing -Headers @{'Cache-Control'='no-cache'} $scriptUrl).content -Verbose`""
-
-
-Start-Process powershell -Wait -ArgumentList "-NoExit -Command `"Write-Output 'balle'; write-output 'nalle'`""
-
-Start-Process powershell -Wait -ArgumentList "-NoExit -Command `"{$scriptUrl = 'https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-oobeSystem-FirstLogon.ps1'}`""
-
 
 
 
