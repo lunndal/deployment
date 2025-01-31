@@ -32,6 +32,7 @@ $logFile = "C:\Windows\Temp\Setup-oobeSystem-FirstLogon-$($env:USERNAME).log"
 # Enable logging.
 Start-Transcript -Path $logFile -Append
 
+Write-Debug "Scriptet kjører"
 #
 # Windows settings.
 #
@@ -45,7 +46,7 @@ Start-Transcript -Path $logFile -Append
 # ? Install Chrome extensions
 # BROKEN - plugins do not appear!
 #
-
+<#
 $updateUrl = 'json { "update_url": "https://clients2.google.com/service/update2/crx" }'
 
 # 1password
@@ -57,6 +58,7 @@ Set-ItemProperty -Path $regPath -Name "update_url" -Value $updateUrl
 $regPath = "HKLM:\SOFTWARE\WOW6432Node\Google\Chrome\Extensions\eimadpbcbfnmbkopoojfekhnkhdbieeh"
 New-Item -Path $regPath -Force
 Set-ItemProperty -Path $regPath -Name "update_url" -Value $updateUrl
+#>
 
 #
 # Application settings

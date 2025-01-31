@@ -1,8 +1,12 @@
 Start-Process powershell -ArgumentList "-NoExit -Command `"
-    $url = 'http://example.com/script.ps1'; 
+    $url = 'https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-oobeSystem-FirstLogon.ps1'; 
     $scriptPath = Join-Path $env:TEMP 'script.ps1'; 
     Invoke-WebRequest -Uri $url -OutFile $scriptPath; 
     . $scriptPath`"" -Wait
+
+
+$scriptUrl = "https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-oobeSystem-FirstLogon.ps1"
+Invoke-Expression (Invoke-WebRequest -UseBasicParsing $scriptUrl).content -Verbose
 
 <#
 Start-Transcript -Path "C:\Windows\Temp\terje-setup.log" -Append
