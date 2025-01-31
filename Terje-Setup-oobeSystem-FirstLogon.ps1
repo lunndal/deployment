@@ -36,7 +36,7 @@ Write-Debug "Scriptet kjører"
 #
 # Windows settings.
 #
-
+ 
 
 #
 # Install applications.
