@@ -34,6 +34,7 @@ $chocoLog = "C:\Windows\Temp\Setup-specialize-choco.log"
 $myName = "Terje With Lunndal"
 $myEmail = "terje@lunndal.priv.no"
 $chocoApps = @"
+powertoys
 notepadplusplus
 choco-cleaner
 choco-upgrade-all-at-startup
@@ -42,12 +43,10 @@ sysinternals
 pwsh
 git
 GoogleChrome
-powertoys
 putty
 7zip
 ffmpeg
 fsviewer
-greenshot
 logitech-camera-settings
 paint.net
 protonvpn
@@ -61,6 +60,7 @@ vscode
 Firefox
 audacious
 audacity
+greenshot
 "@
 
 
