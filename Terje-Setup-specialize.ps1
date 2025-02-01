@@ -30,40 +30,7 @@
 # Declarations
 #
 $logFile = "C:\Windows\Temp\Setup-specialize.log"
-$chocoLog = "C:\Windows\Temp\Setup-specialize-choco.log"
 
-$myName = "Terje With Lunndal"
-$myEmail = "terje@lunndal.priv.no"
-
-$chocoApps = @"
-notepadplusplus
-choco-cleaner
-choco-upgrade-all-at-startup
-1password
-sysinternals
-pwsh
-git
-GoogleChrome
-powertoys
-putty
-7zip
-ffmpeg
-fsviewer
-greenshot
-logitech-camera-settings
-paint.net
-protonvpn
-teamviewer
-transgui
-treesizefree
-vlc
-wireshark
-yt-dlp
-vscode
-Firefox
-audacious
-audacity
-"@
 
 # Enable logging.
 Start-Transcript -Path $logFile -Append
@@ -78,33 +45,6 @@ Write-Output "Starting script in specialize phase."
 # Windows settings.
 #
 
-# OK - Enable Ultimate Performance power plan.
-$out = powercfg.exe /DUPLICATESCHEME e9a42b02-d5df-448d-aa00-03f14749eb61;
-if ( $out -match '\s([a-f0-9-]{36})\s' ) {
-    powercfg.exe /SETACTIVE $Matches[1];
-}
-
-#
-# Install applications.
-#
-
-# OK - Install chocolatey (in system context, elevated)
-Set-ExecutionPolicy Bypass -Scope Process -Force
-[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-choco feature enable -n allowGlobalConfirmation
-
-# Choco applications.  
-# OK? for 7zip. Not sure about the list as a whole.
-$chocoAppsArray = ($chocoApps -split "`n")
-choco install @chocoAppsArray --log-file=$($chocoLog) --no-progress --yes --no-color --limit-output --ignore-detected-reboot
-
-# onthespot
-$installDir = (Join-Path $env:ProgramFiles "onthespot")
-New-Item -ItemType Directory -Path $installDir
-Invoke-WebRequest -Uri "https://github.com/casualsnek/onthespot/releases/latest/download/onthespot_win_ffm.exe" -OutFile "$($installDir)\onthespot_win_ffm.exe"
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/lunndal/onthespot-cachefix/refs/heads/main/Start-OnTheSpot.ps1" -OutFile "$($installDir)\Start-OnTheSpot.ps1" 
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/lunndal/onthespot-cachefix/refs/heads/main/Start-OnTheSpot.ps1.lnk" -OutFile "$($installDir)\Start-OnTheSpot.ps1.lnk" 
 
 #
 # Install Chrome extensions
