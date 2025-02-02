@@ -31,7 +31,6 @@
 #
 $logFile = "C:\Windows\Temp\Setup-oobeSystem.log"
 $chocoLog = "C:\Windows\Temp\Setup-specialize-choco.log"
-$pinTaskbarUrl = "https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Windows/Pin-TaskbarIcons.ps1"
 $chocoApps = @"
 powertoys
 notepadplusplus
@@ -130,6 +129,7 @@ $1passFirefoxExtId = "dppgmdbiimibapkepcbdbmkaabgiofem;https://edge.microsoft.co
 #
 # Pin taskbar icons.
 #
+$pinTaskbarUrl = "https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Windows/Pin-TaskbarIcons.ps1"
 Invoke-Expression (Invoke-WebRequest -UseBasicParsing -Headers @{"Cache-Control"="no-cache"} $pinTaskbarUrl).content -Verbose
 
 #
