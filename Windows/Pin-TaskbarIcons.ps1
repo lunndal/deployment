@@ -11,10 +11,10 @@ $taskbar_layout =
     <defaultlayout:TaskbarLayout>
       <taskbar:TaskbarPinList>
         <taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Proton\VPN\ProtonVPN.Launcher.exe" />
-        <taskbar:DesktopApp DesktopApplicationLinkPath=""C:\Program Files (x86)\Transmission Remote GUI\transgui.exe"" />
+        <taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files (x86)\Transmission Remote GUI\transgui.exe" />
         <taskbar:DesktopApp DesktopApplicationLinkPath="C:\Users\terje\AppData\Local\1Password\app\8\1Password.exe" />
         <taskbar:DesktopApp DesktopApplicationID="Microsoft.WindowsTerminal_8wekyb3d8bbwe!app" />
-        <taskbar:DesktopApp DesktopApplicationLinkPath=""C:\Program Files (x86)\Audacious\bin\audacious.exe" />
+        <taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files (x86)\Audacious\bin\audacious.exe" />
         <taskbar:DesktopApp DesktopApplicationID="SpotifyAB.SpotifyMusic_zpdnekdrzrea0!app" />
         <taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\Audacity\Audacity.exe" />
         <taskbar:DesktopApp DesktopApplicationLinkPath="C:\Program Files\paint.net\paintdotnet.exe" />
