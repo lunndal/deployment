@@ -1,0 +1,30 @@
+{
+    "homepage": "https://www.google.com",
+    "homepage_is_newtabpage": false,
+
+    "browser": {
+        "show_home_button": true
+    },    
+
+    "sync_promo": {
+        "show_on_first_run_allowed": false
+    },
+
+    "distribution": {
+        "msi": true,
+        "system_level": true,
+        "verbose_logging": true,
+        "msi_product_id": "2D51978D-D31B-3B41-9420-DFD52FB684CA",
+        "allow_downgrade": false,
+        "import_bookmarks": false,
+        "import_history": false,
+        "import_home_page": false,
+        "import_search_engine": true,
+        "do_not_launch_chrome": true,
+        "make_chrome_default": true,
+        "make_chrome_default_for_user": true,
+        "sync_promo.show_on_first_run_allowed": false
+    }
+}
+
+

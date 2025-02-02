@@ -31,8 +31,6 @@
 #
 $logFile = "C:\Windows\Temp\Setup-oobeSystem.log"
 $chocoLog = "C:\Windows\Temp\Setup-specialize-choco.log"
-$myName = "Terje With Lunndal"
-$myEmail = "terje@lunndal.priv.no"
 $chocoApps = @"
 powertoys
 notepadplusplus
@@ -60,6 +58,7 @@ vscode
 Firefox
 audacious
 audacity
+asio4all
 greenshot
 "@
 
@@ -102,8 +101,6 @@ $chocoAppsArray = ($chocoApps -split "`n")
 choco install @chocoAppsArray --log-file=$($chocoLog) --no-progress --yes --no-color --limit-output --ignore-detected-reboot
 
 
-# Spotify through winget
-winget install spotify.spotify --disable-interactivity --accept-package-agreements --accept-source-agreements --silent
 
 
 # onthespot
@@ -114,15 +111,29 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/lunndal/onthespot-cach
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/lunndal/onthespot-cachefix/refs/heads/main/Start-OnTheSpot.ps1.lnk" -OutFile "$($installDir)\Start-OnTheSpot.ps1.lnk" 
 
 #
-# Install Chrome extensions
+# Install browser extensions
+#
+
+# 1password
+$1passChromeExtId = "aeblfdkhhhdcdjpifhhbdiojplfjncoa"
+
+
+
+$1passFirefoxExtId = "d634138d-c276-4fc8-924b-40a0ea21d284.xpi"
+$1passFirefoxExtId = "dppgmdbiimibapkepcbdbmkaabgiofem;https://edge.microsoft.com/extensionwebstorebase/v1/crx"
+
+# Dark reader
+
+# Consent-o-matic
+
+#
+# Pin taskbar icons.
+#
+
 
 #
 # Application settings
 #
-
-# Git 
-git config --global user.email $myEmail
-git config --global user.name $myName
 
 
 #Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-END oobeSystem phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal

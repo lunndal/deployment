@@ -28,6 +28,10 @@
 # Declarations
 #
 $logFile = "C:\Windows\Temp\Setup-oobeSystem-FirstLogon-$($env:USERNAME).log"
+$myName = "Terje With Lunndal"
+$myEmail = "terje@lunndal.priv.no"
+$mySamAccountName = "Terje"
+
 
 # Enable logging.
 Start-Transcript -Path $logFile #-Append
@@ -47,13 +51,21 @@ Write-Output "Starting script in oobeSystem FirstLogon phase."
 # Install applications.
 #
 
+# Spotify through winget
+winget install spotify.spotify --disable-interactivity --accept-package-agreements --accept-source-agreements --silent
+
+
 #
 # Install Chrome extensions
 
 #
 # Application settings
 #
-
+# Git 
+if ( $Env:UserName -eq $mySamAccountName ) {
+    git config --global user.email $myEmail
+    git config --global user.name $myName
+}
 
 #Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-END oobeSystem-FirstLogon phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
 
