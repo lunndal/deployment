@@ -1,3 +1,10 @@
+# Missing items
+#
+# Outlook 
+# Excel
+# Live, MixedInKey, premiere, lightroom
+#
+#
 $taskbar_layout =
 @"
 <?xml version="1.0" encoding="utf-8"?>
