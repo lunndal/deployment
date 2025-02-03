@@ -61,11 +61,15 @@ winget install spotify.spotify --disable-interactivity --accept-package-agreemen
 #
 # Application settings
 #
+
 # Git 
 if ( $Env:UserName -eq $mySamAccountName ) {
     git config --global user.email $myEmail
     git config --global user.name $myName
 }
+
+# PowerToys
+# %USERPROFILE%\AppData\Local\Microsoft
 
 #Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-END oobeSystem-FirstLogon phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
 
