@@ -11,20 +11,25 @@
       -------------------------------------------------------
 #>
 
+###################################################################################################
+#                                                                                                 #
+#  FirstLogon for NEW users, except for the first admin account defined in the autounattend.xml.  #
+#                                                                                                 #
+###################################################################################################
+
 
 # Source
-# https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-oobeSystem-FirstLogon.ps1
+# https://raw.githubusercontent.com/lunndal/deployment/refs/heads/??????????????????????????????????????????
 
 #
 # USAGE
-# Run this script during the "oobeSystem" phase, under the FirstLogonCommands section, of autounattend.xml
-# Commands will run only once in the context of the logged in user.
+# Script runs when a user logs in for the first time. Commands will run only once in the context of the logged in user.
+# NOTE . Needs to run the FirstLogon-Common script first!
 #
-# User specific settings, and global settings, go in this file.
+# User specific settings go in this file.
 #
 # NOTE
-# At this stage the Private Git repo is already cloned to local disk,
-# and the first admin account has already logged in, thus running ooobeSystem.
+# At this stage the Private Git repo is already cloned to local disk.
 # 
 
 #
@@ -34,16 +39,12 @@
 #
 # Declarations
 #
-$logFile = "C:\Windows\Temp\Setup-oobeSystem-FirstLogon-$($env:USERNAME).log"
-$depoloyScriptsRoot = "C:\Users\terje\src\Private\os\windows\deployment\scripts"
-$myName = "Terje With Lunndal"
-$myEmail = "terje@lunndal.priv.no"
-$mySamAccountName = "Terje"
+$logFile = "C:\Windows\Temp\Setup-oobeSystem-NewUsers-$($env:USERNAME).log"
 
 
 # Enable logging.
 Start-Transcript -Path $logFile #-Append
-Write-Output "Starting script in oobeSystem FirstLogon phase (when the first defined admin user is auto logged in)."
+Write-Output "Starting script in NewUser FirstLogon phase (Runs when a new user logs in, but not for the first defined admin)"
 
 #
 # Debug handling.
@@ -51,15 +52,8 @@ Write-Output "Starting script in oobeSystem FirstLogon phase (when the first def
 #Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-START oobeSystem-FirstLogon phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
 
 #
-# Clone repo from GitHub
+# Run the common FirstLogon script (shared by ALL users, including the first defined admin)
 #
-<# 
-if ( $Env:UserName -eq $mySamAccountName ) {
-    git config --global user.email $myEmail
-    git config --global user.name $myName
-    git clone https://XXXYYYZZZ@github.com/lunndal/Private.git "C:\Users\Terje\src\Private"
-}
- #>
 
 
 #
@@ -70,9 +64,6 @@ if ( $Env:UserName -eq $mySamAccountName ) {
 #
 # Install applications.
 #
-
-# Spotify through winget
-winget install spotify.spotify --disable-interactivity --accept-package-agreements --accept-source-agreements --silent
 
 
 #

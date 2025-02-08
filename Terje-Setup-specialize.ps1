@@ -24,7 +24,6 @@
 #
 # ISSUES
 # ? Execution Policy er ikke liberal nok når dette skriptet skal kjøres.
-# ? WiFi var ikke påkoblet. Måtte gjøres manuelt. 
 
 #
 # Declarations
