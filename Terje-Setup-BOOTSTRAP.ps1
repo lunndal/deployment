@@ -4,11 +4,9 @@ Invoke-Expression (Invoke-WebRequest -UseBasicParsing -Headers @{"Cache-Control"
 $scriptUrl = "https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-oobeSystem.ps1"
 Invoke-Expression (Invoke-WebRequest -UseBasicParsing -Headers @{"Cache-Control"="no-cache"} $scriptUrl).content -Verbose
 
-$scriptUrl = "https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-oobeSystem-FirstLogon.ps1"
-Invoke-Expression (Invoke-WebRequest -UseBasicParsing -Headers @{"Cache-Control"="no-cache"} $scriptUrl).content -Verbose
+C:\Users\terje\src\deployment\Terje-Setup-oobeSystem-FirstLogon.ps1
 
-
-
+C:\Users\terje\src\deployment\Terje-Setup-NewUsers-FirstLogon.ps1
 
 
 
