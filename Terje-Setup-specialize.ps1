@@ -18,7 +18,7 @@
 #
 # USAGE
 # Run this script during the "specialize" phase from autounattend.xml.
-# Commands will run in system context before any users are created.
+# Commands will run in system context before any users are created, so any user settings will apply to ALL users.
 # 
 
 #

@@ -1,6 +1,25 @@
 Write-Error "This should be rewritten before it can be used."
 exit
 
+<# 
+
+SEQUENCE
+
+1. Specialize phase
+   Terje-Setup-specialize.ps1
+
+2. oobeSystem phase
+   Install software (Terje-Setup-oobeSystem.ps1)
+   Clone Private repo (from in autounattend.xml)
+   Configure FirstRun for first admin (Terje-Setup-oobeSystem-FirstLogon.ps1)
+
+3. New users FirstRun
+   All new users first time logon (first admin already did this)
+   Terje-Setup-NewUsers-FirstLogon.ps1
+
+ #>
+
+<# 
 $scriptUrl = "https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-specialize.ps1"
 Invoke-Expression (Invoke-WebRequest -UseBasicParsing -Headers @{"Cache-Control"="no-cache"} $scriptUrl).content -Verbose
 
@@ -11,7 +30,7 @@ C:\Users\terje\src\deployment\Terje-Setup-oobeSystem-FirstLogon.ps1
 
 C:\Users\terje\src\deployment\Terje-Setup-NewUsers-FirstLogon.ps1
 
-
+ #>
 
 
 
