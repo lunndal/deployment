@@ -1,3 +1,6 @@
+Write-Error "This should be rewritten before it can be used."
+exit
+
 $scriptUrl = "https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-specialize.ps1"
 Invoke-Expression (Invoke-WebRequest -UseBasicParsing -Headers @{"Cache-Control"="no-cache"} $scriptUrl).content -Verbose
 

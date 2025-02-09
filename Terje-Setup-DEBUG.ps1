@@ -1,1 +1,0 @@
-Start-Process powershell -ArgumentList "-NoExit -Command Get-Process" -Wait
