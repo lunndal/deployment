@@ -29,8 +29,7 @@
 # Declarations
 #
 $logDir = "C:\Windows\Setup\Scripts"
-$scriptFileName = Split-Path -Leaf $MyInvocation.MyCommand.Path
-$logFile = "$($logDir)\$($scriptFileName)-$($env:USERNAME).log"
+$logFile = "$($logDir)\Terje-Setup-specialize-$($env:USERNAME).log"
 
 
 
