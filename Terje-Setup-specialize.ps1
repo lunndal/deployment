@@ -28,7 +28,10 @@
 #
 # Declarations
 #
-$logFile = "C:\Windows\Temp\Setup-specialize.log"
+$logDir = "C:\Windows\Setup\Scripts"
+$scriptFileName = Split-Path -Leaf $MyInvocation.MyCommand.Path
+$logFile = "$($logDir)\$($scriptFileName)-$($env:USERNAME).log"
+
 
 
 # Enable logging.

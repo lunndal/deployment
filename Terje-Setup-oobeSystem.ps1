@@ -62,6 +62,10 @@ asio4all
 greenshot
 "@
 
+# Log settings
+$logDir = "C:\Windows\Setup\Scripts"
+$scriptFileName = Split-Path -Leaf $MyInvocation.MyCommand.Path
+$logFile = "$($logDir)\$($scriptFileName)-$($env:USERNAME).log"
 
 # Enable logging.
 Start-Transcript -Path $logFile -Append
