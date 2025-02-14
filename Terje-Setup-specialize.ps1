@@ -40,7 +40,7 @@ Write-Output "Starting script in specialize phase."
 #
 # Debug handling.
 #
-#Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-START specialize phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
+Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-START specialize phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
 
 #
 # Windows settings.
@@ -56,7 +56,7 @@ Write-Output "Starting script in specialize phase."
 # Global application settings
 #
 
-#Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-END specialize phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
+Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-END specialize phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
 
 # Stop logging.
 Stop-Transcript
