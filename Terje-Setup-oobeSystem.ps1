@@ -29,8 +29,10 @@
 #
 # Declarations
 #
-$logFile = "C:\Windows\Temp\Setup-oobeSystem.log"
-$chocoLog = "C:\Windows\Temp\Setup-oobeSystem-choco.log"
+
+$logDir = "C:\Windows\Setup\Scripts"
+$logFile = "$($logDir)\Terje-Setup-oobeSystem-$($env:USERNAME).log"
+$chocoLog = "$($logDir)\Setup-oobeSystem-CHOCO.log"
 $chocoApps = @"
 powertoys
 notepadplusplus
@@ -59,6 +61,7 @@ Firefox
 audacious
 audacity
 asio4all
+FoxitReader
 greenshot
 "@
 
