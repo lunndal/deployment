@@ -35,7 +35,7 @@ $logFile = "$($logDir)\Terje-Setup-specialize-$($env:USERNAME).log"
 
 # Enable logging.
 Start-Transcript -Path $logFile -Append
-Write-Output "Starting script in specialize phase."
+Write-Verbose "Starting script in specialize phase."
 
 #
 # Debug handling.

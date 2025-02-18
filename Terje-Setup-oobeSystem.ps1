@@ -71,7 +71,7 @@ $logFile = "$($logDir)\Terje-Setup-oobeSystem-$($env:USERNAME).log"
 
 # Enable logging.
 Start-Transcript -Path $logFile -Append
-Write-Output "Starting script in oobeSystem phase."
+Write-Verbose "Starting script in oobeSystem phase."
 
 #
 # Debug handling.
