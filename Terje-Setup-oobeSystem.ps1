@@ -32,7 +32,7 @@
 
 $logDir = "C:\Windows\Setup\Scripts"
 $logFile = "$($logDir)\Terje-Setup-oobeSystem-$($env:USERNAME).log"
-$chocoLog = "$($logDir)\Setup-oobeSystem-CHOCO.log"
+<# 
 $chocoApps = @"
 powertoys
 notepadplusplus
@@ -64,10 +64,47 @@ asio4all
 FoxitReader
 greenshot
 "@
+ #>
 
-# Log settings
+ $chocoApps = @{
+    "powertoys"                     = "/silent"
+    "notepadplusplus"               = ""
+    "choco-cleaner"                 = ""
+    "choco-upgrade-all-at-startup"  = ""
+    "1password"                     = "" 
+    "sysinternals"                  = ""
+    "pwsh"                          = ""
+    "git"                           = ""
+    "GoogleChrome"                  = ""
+    "putty"                         = ""
+    "7zip"                          = ""
+    "ffmpeg"                        = ""
+    "fsviewer"                      = ""
+    "logitech-camera-settings"      = ""
+    "paint.net"                     = ""
+    "teamviewer"                    = ""
+    "transgui"                      = ""
+    "treesizefree"                  = ""
+    "vlc"                           = ""
+    "wireshark"                     = ""
+    "yt-dlp"                        = ""
+    "vscode"                        = ""
+    "Firefox"                       = ""
+    "audacious"                     = ""
+    "audacity"                      = ""
+    "asio4all"                      = ""
+    "FoxitReader"                   = ""
+}
+
+# Misbehaving choco packages (popups etc). Should be ran at first proper logon after oobe
+#"protonvpn"                     = "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /LOG" # These parameters dont work. Proton support issue 3480745.
+#"greenshot"                     = ""
+
+
+
+ # Log settings
 $logDir = "C:\Windows\Setup\Scripts"
-$logFile = "$($logDir)\Terje-Setup-oobeSystem-$($env:USERNAME).log"
+#$chocoLog = "$($logDir)\Terje-Setup-oobeSystem-$($env:USERNAME).log"
 
 # Enable logging.
 Start-Transcript -Path $logFile -Append
@@ -91,8 +128,14 @@ choco feature enable -n allowGlobalConfirmation
 
 # Choco applications.  
 # OK? for 7zip. Not sure about the list as a whole.
-$chocoAppsArray = ($chocoApps -split "`n")
-choco install @chocoAppsArray --log-file=$($chocoLog) --no-progress --yes --no-color --limit-output --ignore-detected-reboot
+#$chocoAppsArray = ($chocoApps -split "`n")
+#choco install @chocoAppsArray --log-file=$($chocoLog) --no-progress --yes --no-color --limit-output --ignore-detected-reboot
+
+foreach ($package in $chocoApps.GetEnumerator() ) {
+    Write-Verbose "Installing choco package $($package.Key) with params $($package.Value)"
+    $chocoLog = "$($logDir)\Terje-Setup-oobeSystem-$($env:USERNAME)-CHOCO-$($package.Key).log"
+    choco install $package.Key --log-file=$($chocoLog) --no-progress --yes --no-color --limit-output --ignore-detected-reboot --accept-license --install-arguments "$($package.Value)"
+}
 
 # onthespot
 $installDir = (Join-Path $env:ProgramFiles "onthespot")
