@@ -81,8 +81,7 @@ greenshot
 
  $chocoApps = @(
     "putty",
-    "7zip",
-    "FoxitReader"
+    "7zip"
  )
 
  <# 
@@ -109,9 +108,6 @@ greenshot
 
 
 
- # Log settings
-$logDir = "C:\Windows\Setup\Scripts"
-#$chocoLog = "$($logDir)\Terje-Setup-Audit-$($env:USERNAME).log"
 
 # Enable logging.
 Start-Transcript -Path $logFile -Append
@@ -138,20 +134,20 @@ choco feature enable -n allowGlobalConfirmation
 #$chocoAppsArray = ($chocoApps -split "`n")
 #choco install @chocoAppsArray --log-file=$($chocoLog) --no-progress --yes --no-color --limit-output --ignore-detected-reboot
 
-Join-String
-foreach ($package in $chocoApps.GetEnumerator() ) {
-    Write-Verbose "Installing choco package $($package.Key) with params $($package.Value)"
-    $chocoLog = "$($logDir)\Terje-Setup-Audit-$($env:USERNAME)-CHOCO-$($package.Key).log"
-    choco install $package.Key --log-file=$($chocoLog) --no-progress --yes --no-color --limit-output --ignore-detected-reboot --accept-license 
+foreach ($package in $chocoApps) {
+    Write-Verbose "Installing choco package $($package) with params $($package)"
+    $chocoLog = "$($logDir)\Terje-Setup-Audit-$($env:USERNAME)-CHOCO-$($package).log"
+    choco install $package --log-file=$($chocoLog) --no-progress --yes --no-color --limit-output --ignore-detected-reboot --accept-license 
 }
 
 # onthespot
+<# 
 $installDir = (Join-Path $env:ProgramFiles "onthespot")
 New-Item -ItemType Directory -Path $installDir
 Invoke-WebRequest -Uri "https://github.com/casualsnek/onthespot/releases/latest/download/onthespot_win_ffm.exe" -OutFile "$($installDir)\onthespot_win_ffm.exe"
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/lunndal/onthespot-cachefix/refs/heads/main/Start-OnTheSpot.ps1" -OutFile "$($installDir)\Start-OnTheSpot.ps1" 
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/lunndal/onthespot-cachefix/refs/heads/main/Start-OnTheSpot.ps1.lnk" -OutFile "$($installDir)\Start-OnTheSpot.ps1.lnk" 
-
+ #>
 
 #Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-END Audit phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
 
