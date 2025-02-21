@@ -31,7 +31,7 @@
 #
 
 $logDir = "C:\Windows\Setup\Scripts"
-$logFile = "$($logDir)\Terje-Setup-Audit-$($env:USERNAME).log"
+#$logFile = "$($logDir)\Terje-Setup-Audit-$($env:USERNAME).log"
 <# 
 $chocoApps = @"
 powertoys
@@ -67,7 +67,11 @@ greenshot
  #>
 
  <# 
-     "powertoys",
+    #>
+
+
+ $chocoApps = @(
+    "powertoys",
     "notepadplusplus",
     "choco-cleaner",
     "choco-upgrade-all-at-startup",
@@ -76,16 +80,9 @@ greenshot
     "pwsh",
     "git",
     "GoogleChrome",
-    #>
-
-
- $chocoApps = @(
     "putty",
-    "7zip"
- )
-
- <# 
-     "ffmpeg",
+    "7zip",
+    "ffmpeg",
     "fsviewer",
     "logitech-camera-settings",
     "paint.net",
@@ -100,18 +97,27 @@ greenshot
     "audacious",
     "audacity",
     "asio4all",
+    "protonvpn",
+    "greenshot"
+ )
+
+ <# 
  #>
 
 # Misbehaving choco packages (popups etc). Should be ran at first proper logon after oobe
-#"protonvpn"                     = "/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /LOG" # These parameters dont work. Proton support issue 3480745.
-#"greenshot",
+#"protonvpn"  # Cant install w/o explorer gui - not suitable for specialize
+#"greenshot"  # throws exception - not suitable for specialize
+# git not spcevilalize
+#
+# SW INSTALL EGNER SEG IKKE FOR SPECIALIZE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#
 
 
 
 
 # Enable logging.
-Start-Transcript -Path $logFile -Append
-Write-Verbose "Starting script in Audit phase."
+#Start-Transcript -Path $logFile -Append
+#Write-Verbose "Starting script in Audit phase."
 
 #
 # Debug handling.
@@ -135,9 +141,9 @@ choco feature enable -n allowGlobalConfirmation
 #choco install @chocoAppsArray --log-file=$($chocoLog) --no-progress --yes --no-color --limit-output --ignore-detected-reboot
 
 foreach ($package in $chocoApps) {
-    Write-Verbose "Installing choco package $($package) with params $($package)"
+    Write-Host "Installing choco package $($package) with params $($package)"
     $chocoLog = "$($logDir)\Terje-Setup-Audit-$($env:USERNAME)-CHOCO-$($package).log"
-    choco install $package --log-file=$($chocoLog) --no-progress --yes --no-color --limit-output --ignore-detected-reboot --accept-license 
+    choco install $package --no-progress --yes --no-color --limit-output --ignore-detected-reboot --accept-license 
 }
 
 # onthespot
@@ -152,4 +158,4 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/lunndal/onthespot-cach
 #Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-END Audit phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
 
 # Stop logging.
-Stop-Transcript
+#Stop-Transcript
