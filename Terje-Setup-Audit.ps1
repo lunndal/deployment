@@ -5,7 +5,6 @@
 
 $logDir = "C:\Windows\Setup\Scripts"
 $chocoApps = @(
-    "powertoys",
     "notepadplusplus",
     "choco-cleaner",
     "choco-upgrade-all-at-startup",
@@ -31,13 +30,13 @@ $chocoApps = @(
     "audacious",
     "audacity",
     "asio4all",
-    "protonvpn",
-    "greenshot"
+    "greenshot",
+    "powertoys",
+    "protonvpn"
  )
 
-#
-# Debug handling.
-#
+
+# DEBUG START
 #Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-START Audit phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
 
 
@@ -59,15 +58,12 @@ foreach ($package in $chocoApps) {
 }
 
 # onthespot
-<# 
 $installDir = (Join-Path $env:ProgramFiles "onthespot")
 New-Item -ItemType Directory -Path $installDir
 Invoke-WebRequest -Uri "https://github.com/casualsnek/onthespot/releases/latest/download/onthespot_win_ffm.exe" -OutFile "$($installDir)\onthespot_win_ffm.exe"
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/lunndal/onthespot-cachefix/refs/heads/main/Start-OnTheSpot.ps1" -OutFile "$($installDir)\Start-OnTheSpot.ps1" 
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/lunndal/onthespot-cachefix/refs/heads/main/Start-OnTheSpot.ps1.lnk" -OutFile "$($installDir)\Start-OnTheSpot.ps1.lnk" 
- #>
 
+# DEBUG END
 #Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-END Audit phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
 
-# Stop logging.
-#Stop-Transcript
