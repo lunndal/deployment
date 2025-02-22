@@ -28,19 +28,19 @@
 #
 # Declarations
 #
-$logDir = "C:\Windows\Setup\Scripts"
-$logFile = "$($logDir)\Terje-Setup-specialize-$($env:USERNAME).log"
+#$logDir = "C:\Windows\Setup\Scripts"
+#$logFile = "$($logDir)\Terje-Setup-specialize-$($env:USERNAME).log"
 
 
 
 # Enable logging.
-Start-Transcript -Path $logFile -Append
-Write-Verbose "Starting script in specialize phase."
+#Start-Transcript -Path $logFile -Append
+#Write-Verbose "Starting script in specialize phase."
 
 #
 # Debug handling.
 #
-Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-START specialize phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
+#Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-START specialize phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
 
 #
 # Windows settings.
@@ -56,7 +56,7 @@ Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-STA
 # Global application settings
 #
 
-Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-END specialize phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
+#Start-Process powershell -ArgumentList "-NoExit -Command `"Write-Host 'DEBUG-END specialize phase. Exit shell when done debugging.'`"" -Wait -WindowStyle Normal
 
 # Stop logging.
-Stop-Transcript
+#Stop-Transcript

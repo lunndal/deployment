@@ -57,6 +57,15 @@ foreach ($package in $chocoApps) {
     choco install $package --no-progress --yes --no-color --limit-output --ignore-detected-reboot --accept-license 
 }
 
+#
+# Cleanup after choco installs.
+#
+
+# Close PowerToys welcome screen.
+Get-Process | Where-Object { $_.MainWindowTitle -match "powertoys" } |  Select-Object Id, ProcessName, MainWindowTitle | Stop-Process
+# ProtonVPN
+# Greenshot
+
 # onthespot
 $installDir = (Join-Path $env:ProgramFiles "onthespot")
 New-Item -ItemType Directory -Path $installDir
