@@ -52,10 +52,6 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://com
 choco feature enable -n allowGlobalConfirmation
 
 # Choco applications.  
-# OK? for 7zip. Not sure about the list as a whole.
-#$chocoAppsArray = ($chocoApps -split "`n")
-#choco install @chocoAppsArray --log-file=$($chocoLog) --no-progress --yes --no-color --limit-output --ignore-detected-reboot
-
 foreach ($package in $chocoApps) {
     Write-Host "Installing choco package $($package) with params $($package)"
     $chocoLog = "$($logDir)\Terje-Setup-Audit-$($env:USERNAME)-CHOCO-$($package).log"
