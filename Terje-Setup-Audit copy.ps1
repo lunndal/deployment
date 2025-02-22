@@ -1,10 +1,76 @@
 
+# Source 
+# https://raw.githubusercontent.com/lunndal/deployment/refs/heads/main/Terje-Setup-Audit.ps1
+
+#
+# USAGE
+# Run this script during the "Audit" phase from autounattend.xml
+# Commands will run in the context of the first admin user created, when the installer automatically logs the user in.
+#
+# PURPOSE
+# Global software installation go in this file. After this script is run, the following happens:
+# 1. The autounattend will clone the Private git repo, and we can subsequentally 
+#    run the rest of the scripts from local disk.
+# 2. The Terje-Setup-Audit-FirstLogon.ps1 will run, and perform configuration intende for the
+#    first defined admin user form the unattend file.
+#
+# NOTE
+# This script will count against the "FirstRun" for the first configured admin user, but it's solely for
+# installing software pre Git clone of Private repo. Later in this phase, after cloning the repo, 
+# any other FirstRun commands for the first logged in admin user will be run from the 
+# Terje-Setup-Audit-FirstLogon.ps1 script.
+# All other users will instead run the Terje-Setup-NewUsers-FirstLogon.ps1 script.
+# 
+
+#
+# ISSUES
+# ?
+
 #
 # Declarations
 #
 
 $logDir = "C:\Windows\Setup\Scripts"
-$chocoApps = @(
+#$logFile = "$($logDir)\Terje-Setup-Audit-$($env:USERNAME).log"
+<# 
+$chocoApps = @"
+powertoys
+notepadplusplus
+choco-cleaner
+choco-upgrade-all-at-startup
+1password
+sysinternals
+pwsh
+git
+GoogleChrome
+putty
+7zip
+ffmpeg
+fsviewer
+logitech-camera-settings
+paint.net
+protonvpn
+teamviewer
+transgui
+treesizefree
+vlc
+wireshark
+yt-dlp
+vscode
+Firefox
+audacious
+audacity
+asio4all
+FoxitReader
+greenshot
+"@
+ #>
+
+ <# 
+    #>
+
+
+ $chocoApps = @(
     "powertoys",
     "notepadplusplus",
     "choco-cleaner",
@@ -35,6 +101,24 @@ $chocoApps = @(
     "greenshot"
  )
 
+ <# 
+ #>
+
+# Misbehaving choco packages (popups etc). Should be ran at first proper logon after oobe
+#"protonvpn"  # Cant install w/o explorer gui - not suitable for specialize
+#"greenshot"  # throws exception - not suitable for specialize
+# git not spcevilalize
+#
+# SW INSTALL EGNER SEG IKKE FOR SPECIALIZE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#
+
+
+
+
+# Enable logging.
+#Start-Transcript -Path $logFile -Append
+#Write-Verbose "Starting script in Audit phase."
+
 #
 # Debug handling.
 #
@@ -45,7 +129,7 @@ $chocoApps = @(
 # Install applications.
 #
 
-# chocolatey (in admin context)
+# chocolatey (in system context, elevated)
 Set-ExecutionPolicy Bypass -Scope Process -Force
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
 Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
